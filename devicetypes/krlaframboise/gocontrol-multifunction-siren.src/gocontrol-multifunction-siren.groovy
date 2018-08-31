@@ -122,7 +122,7 @@
  *  for the specific language governing permissions and limitations under the License.
  */
 metadata {
-	definition (name: "GoControl Multifunction Siren", namespace: "krlaframboise", author: "Kevin LaFramboise") {
+	definition (name: "GoControl Multifunction Siren", namespace: "castlecole", author: "Kevin LaFramboise") {
 		capability "Actuator"
 		capability "Alarm"
 		capability "Battery"
