@@ -121,6 +121,11 @@
  *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
  *  for the specific language governing permissions and limitations under the License.
  */
+
+def version() {
+  return "v2 (20180831)\nGoControl Multifunction Siren"
+}
+
 metadata {
 	definition (name: "GoControl Multifunction Siren", namespace: "castlecole", author: "Kevin LaFramboise") {
 		capability "Actuator"
@@ -216,17 +221,18 @@ metadata {
 			defaultValue: true, 
 			displayDuringSetup: true, 
 			required: false
+ 		input description: "Version: ${version()}", type: "paragraph", element: "paragraph", title: ""
 	}
 
 	tiles(scale: 2) {
 		multiAttributeTile(name:"status", type: "generic", width: 6, height: 3, canChangeIcon: true){
 			tileAttribute ("device.status", key: "PRIMARY_CONTROL") {
-				attributeState "off", label:'Off', action: "off", icon:"st.alarm.alarm.alarm", backgroundColor:"#ffffff"
-				attributeState "alarmPending", label:'Alarm Pending!', action: "off", icon:"st.alarm.alarm.alarm", backgroundColor:"#ff9999"
-				attributeState "siren", label:'Siren On!', action: "off", icon:"st.alarm.alarm.alarm", backgroundColor:"#ff9999"
-				attributeState "strobe", label:'Strobe On!', action: "off", icon:"st.alarm.alarm.alarm", backgroundColor:"#ff9999"
-				attributeState "both", label:'Siren/Strobe On!', action: "off", icon:"st.alarm.alarm.alarm", backgroundColor:"#ff9999"
-				attributeState "beep", label:'Beeping!', action: "off", icon:"st.Entertainment.entertainment2", backgroundColor:"#99ff99"							
+				attributeState "off", label:'Off', action: "off", icon:"https://raw.githubusercontent.com/castlecole/customdevices/master/alarm-off-icon.png", backgroundColor:"#ffffff"
+				attributeState "alarmPending", label:'Alarm Pending!', action: "off", icon:"https://raw.githubusercontent.com/castlecole/customdevices/master/alarm-off-icon.png", backgroundColor:"#e86d13"
+				attributeState "siren", label:'Siren On!', action: "off", icon:"https://raw.githubusercontent.com/castlecole/customdevices/master/alarm-icon.png", backgroundColor:"#e86d13"
+				attributeState "strobe", label:'Strobe On!', action: "off", icon:"https://raw.githubusercontent.com/castlecole/customdevices/master/alarm-test-icon.png", backgroundColor:"#e86d13"
+				attributeState "both", label:'Siren/Strobe On!', action: "off", icon:"https://raw.githubusercontent.com/castlecole/customdevices/master/alarm-strobe-icon.png", backgroundColor:"#e86d13"
+				attributeState "beep", label:'Beeping!', action: "off", icon:"st.Entertainment.entertainment2", backgroundColor:"#99ff99"
 			}
 		}
 		standardTile("turnOff", "device.alarm", width: 2, height: 2) {
@@ -707,8 +713,8 @@ def zwaveEvent(physicalgraph.zwave.commands.securityv1.SecurityMessageEncapsulat
 
 private getCommandClassVersions() {
 	[
-		0x20: 1,	// Basic
-		0x25: 1,	// Switch Binary
+		0x20: 1,  // Basic
+		0x25: 1,  // Switch Binary
 		0x59: 1,  // AssociationGrpInfo
 		0x5A: 1,  // DeviceResetLocally
 		0x5E: 2,  // ZwaveplusInfo
@@ -716,11 +722,11 @@ private getCommandClassVersions() {
 		0x71: 3,  // Notification (4)
 		0x72: 1,  // ManufacturerSpecific (1,2)
 		0x73: 1,  // Powerlevel
-		0x7A: 2,	// Firmware Update
+		0x7A: 2,  // Firmware Update
 		0x80: 1,  // Battery
 		0x85: 2,  // Association
-		0x86: 1,	// Version (2)
-		0x98: 1		// Security
+		0x86: 1,  // Version (2)
+		0x98: 1	  // Security
 	]
 }
 
